@@ -1,24 +1,41 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
-	"strings"
+	"github.com/eiannone/keyboard"
+	"log"
 )
 
 func main() {
-	var reader = bufio.NewReader(os.Stdin)
+	err := keyboard.Open()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer func() {
+		_ = keyboard.Close()
+	}()
+
+	fmt.Println("Press any key on the keyboard.  Press ESC to quit")
 
 	for {
-		fmt.Print("-> ")
-		userInput, _ := reader.ReadString('\n')
-		userInput = strings.Replace(userInput, "\n", "", -1)
-
-		if userInput == "quit" {
-			break
-		} else {
-			fmt.Println(userInput)
+		char, key, err := keyboard.GetSingleKey()
+		if err != nil {
+			log.Fatal(err)
 		}
+
+		if key != 0 {
+			fmt.Println("You pressed", char, key)
+		} else {
+			fmt.Println("You pressed", char, key)
+		}
+
+		if key == keyboard.KeyEsc {
+			break
+		}
+
 	}
+
+	fmt.Println("program exiting")
+
 }

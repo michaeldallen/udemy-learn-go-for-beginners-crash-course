@@ -2,40 +2,17 @@ package main
 
 import (
 	"fmt"
-	"github.com/eiannone/keyboard"
-	"log"
+	"myapp/game"
 )
 
 func main() {
-	err := keyboard.Open()
-	if err != nil {
-		log.Fatal(err)
+	playAgain := true
+
+	for playAgain {
+		game.Play()
+		playAgain = game.GetYesOrNo("Would you like to play again (y/n)?")
 	}
 
-	defer func() {
-		_ = keyboard.Close()
-	}()
-
-	fmt.Println("Press any key on the keyboard.  Press ESC to quit")
-
-	for {
-		char, key, err := keyboard.GetSingleKey()
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		if key != 0 {
-			fmt.Println("You pressed", char, key)
-		} else {
-			fmt.Println("You pressed", char, key)
-		}
-
-		if key == keyboard.KeyEsc {
-			break
-		}
-
-	}
-
-	fmt.Println("program exiting")
-
+	fmt.Println("")
+	fmt.Println("Goodbye.")
 }

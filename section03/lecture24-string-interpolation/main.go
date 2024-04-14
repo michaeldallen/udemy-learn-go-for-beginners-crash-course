@@ -13,7 +13,7 @@ var reader *bufio.Reader
 type User struct {
 	UserName       string
 	Age            int
-	FavoriteNumber float
+	FavoriteNumber float64
 }
 
 func main() {
@@ -21,14 +21,14 @@ func main() {
 
 	var user User
 
-	user.userName = readString("What is your name?")
-	user.age = readInt("How old are you?")
-	user.favoriteNumber = readFloat("What is your favorite Number?")
+	user.UserName = readString("What is your name?")
+	user.Age = readInt("How old are you?")
+	user.FavoriteNumber = readFloat("What is your favorite Number?")
 
 	fmt.Printf("Your name is %s, you are %d years old and your favorite number is %.2f.\n",
-		user.userName,
-		user.age,
-		user.favoriteNumber)
+		user.UserName,
+		user.Age,
+		user.FavoriteNumber)
 
 }
 
@@ -78,7 +78,7 @@ func readInt(msg string) int {
 
 }
 
-func readInt(msg string) int {
+func readFloat(msg string) float64 {
 
 	for {
 
